@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+
+}
+
+header{
+    display:flex;
+    flex-direction: column;
+    background-color: rgb(78, 71, 71);
+}
+
+nav ul li{
+    list-style-type: none;
+    display: inline-block;
+    margin-left: 45px;
+    margin-top: 20px;
+    height: auto;
+    color: white;
+}
+
+header h1{
+    margin:50px;
+    padding:5px;
+    border-radius:6px ;
+    background-color: beige;
+    width: fit-content;
+    box-shadow: 5px 5px rgba(150, 121, 121, 0.425);
+    color: rgb(78, 71, 71);
+}
+main{
+    background-color: rgb(210, 219, 206);
+    flex-basis: 100%;
+}
