@@ -6,7 +6,7 @@ router.get("/", async (req, res) => {
   try {
     const blogposts = await BlogPosts.findAll();
     const posts = blogposts.map((postsdata) => postsdata.get({ plain: true }));
-    res.render("homepage", { posts });
+    res.render("homepage", { posts, loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
 // Get the Login page
 router.get("/login", (req, res) => {
   try {
-    res.render("loginpage");
+    res.render("loginpage", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
@@ -24,20 +24,11 @@ router.get("/login", (req, res) => {
 // Get the Signup page
 router.get("/signup", (req, res) => {
   try {
-    res.render("signuppage");
+    res.render("signuppage", { loggedIn: req.session.loggedIn });
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.post('/logout', (req, res) => {
-  if (req.session.loggedIn) {
-    req.session.destroy(() => {
-      res.status(204).end();
-    });
-  } else {
-    res.status(404).end();
-  }
-});
 
 module.exports = router;

@@ -12,14 +12,24 @@
             <ul>
                 <li><a href="http://localhost:3001/">Home</a></li>
                 <li><a href="http://localhost:3001/login">Dashboard</a></li>
+                {{#if loggedIn}}
+                <li><a href="#" id="logout">Logout</a></li>
+                {{else}}
                 <li><a href="http://localhost:3001/login">Login</a></li>
-                <li><a href="http://localhost:3001/">Logout</a></li>
+                {{/if}}
             </ul>
         </nav>
-        <h1>The Tech Blog</hi>
+        {{#if loggedIn}}
+        <h1>Your Dashboard</h1>
+        {{else}}
+        <h1>The Tech Blog</h1>
+        {{/if}}
     </header>
     <main>
         {{{body}}}
     </main>
+    {{#if loggedIn}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
 </body>
 </html>

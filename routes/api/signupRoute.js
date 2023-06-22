@@ -1,10 +1,9 @@
 const router = require("express").Router();
-const { BlogCredentials } = require("../../models");
+const { BlogCredentials, BlogPosts } = require("../../models");
 
 // CREATE new user
 router.post("/", async (req, res) => {
   try {
-    console.log("inside post route");
     const dbUserData = await BlogCredentials.create({
       username: req.body.username,
       password: req.body.password,
@@ -39,7 +38,9 @@ router.post("/login", async (req, res) => {
         .json({ message: "Incorrect email or password. Please try again!" });
       return;
     }
+
     req.session.save(() => {
+      req.session.userid = dbUserData.dataValues.id
       req.session.loggedIn = true;
 
       res
@@ -49,6 +50,16 @@ router.post("/login", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
+  }
+});
+
+router.post("/logout", (req, res) => {
+  if (req.session.loggedIn) {
+    req.session.destroy(() => {
+      res.status(204).end();
+    });
+  } else {
+    res.status(404).end();
   }
 });
 
