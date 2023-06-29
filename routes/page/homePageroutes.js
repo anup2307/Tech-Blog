@@ -1,34 +1,49 @@
-const router = require("express").Router();
-const { BlogPosts, BlogCredentials } = require("../../models");
+const router = require('express').Router();
+const { BlogPosts, BlogCredentials } = require('../../models');
 
 // Get all posts for homepage
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const blogposts = await BlogPosts.findAll();
     const posts = blogposts.map((postsdata) => postsdata.get({ plain: true }));
-    res.render("homepage", { posts, loggedIn: req.session.loggedIn });
+    for (var i = 0; i < posts.length; i++) {
+      const username = await BlogCredentials.findOne({
+        where: {
+          id: posts[i].user_id,
+        },
+        attributes: { exclude: ['password'] },
+      });
+      const postDate = posts[i].createdAt.toLocaleDateString();
+      posts[i].createDate = postDate;
+      posts[i].username = username.dataValues.username;
+    }
+
+    res.render('homepage', {
+      posts,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
 // Get the Login page
-router.get("/login", (req, res) => {
+router.get('/login', (req, res) => {
   try {
-    res.render("loginpage", { loggedIn: req.session.loggedIn });
+    res.render('loginpage');
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 // Get the Signup page
-router.get("/signup", (req, res) => {
+router.get('/signup', (req, res) => {
   try {
-    res.render("signuppage", { loggedIn: req.session.loggedIn });
+    res.render('signuppage');
   } catch (err) {
     res.status(500).json(err);
   }
 });
-
 
 module.exports = router;

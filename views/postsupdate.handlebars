@@ -1,0 +1,19 @@
+<div class="card mx-auto w-50 mt-5" style="border:2px solid rgb(88, 84, 84)">
+    <div class="card-header" style="background-color:rgb(88, 84, 84)">
+        Edit Post
+    </div>
+    <div class="card-body px-4 py-3 ">
+        <div class="mb-3">
+            <label for="heading">Title</label>
+            <textarea type="text" class="form-control" id="heading">{{post.heading}}</textarea> 
+        </div>
+        <div class="mb-3">
+            <label for="description">Content</label>
+            <textarea type="text" class="form-control" id="description" rows="3">{{post.description}}</textarea> 
+        </div>
+        <button type="submit" class="btn btn-primary" style="background-color:rgb(88, 84, 84);border:2px solid rgb(88, 84, 84)" data-id="{{id}}">Update</button>
+        <button type="submit" class="btn btn-primary" style="background-color:rgb(88, 84, 84);border:2px solid rgb(88, 84, 84)" data-id="{{id}}">Delete</button>
+    </div>
+</div>
+
+<script src="./js/postsupdatedelete.js"></script>

@@ -10,12 +10,12 @@
     <header>
         <nav>
             <ul>
-                <li><a href="http://localhost:3001/">Home</a></li>
-                <li><a href="http://localhost:3001/login">Dashboard</a></li>
+                <li><a href="/">Home</a></li>
+                <li><a href="/dashboard" id="dashboard">Dashboard</a></li>
                 {{#if loggedIn}}
                 <li><a href="#" id="logout">Logout</a></li>
                 {{else}}
-                <li><a href="http://localhost:3001/login">Login</a></li>
+                <li><a href="/login">Login</a></li>
                 {{/if}}
             </ul>
         </nav>

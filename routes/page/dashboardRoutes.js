@@ -1,27 +1,49 @@
-const router = require("express").Router();
-const { BlogPosts } = require("../../models");
+const router = require('express').Router();
+const { BlogPosts } = require('../../models');
+const withAuth = require('../../utils/auth');
 
-router.get("/", async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
-    console.log("id", req.session.userid);
     const dbPosts = await BlogPosts.findAll({
       where: {
-        user_id: 3,
+        user_id: req.session.user_id,
       },
     });
-    console.log("posts", dbPosts);
+
     const posts = dbPosts.map((post) => post.get({ plain: true }));
-    res.render("dashboard", { posts, loggedIn: req.session.loggedIn });
+    posts.forEach((post) => {
+      const postDate = post.createdAt.toLocaleDateString();
+      post.createDate = postDate;
+    });
+    console.log(posts);
+    res.render('dashboard', {
+      posts,
+      loggedIn: req.session.loggedIn,
+    });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get("/new", async (req, res) => {
+router.get('/new', async (req, res) => {
   try {
-    res.render("newpost", { loggedIn: req.session.loggedIn });
+    res.render('newpost', { loggedIn: req.session.loggedIn });
   } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/:id', async (req, res) => {
+  try {
+    const postbyid = await BlogPosts.findByPk(req.params.id);
+
+    const post = postbyid.get({ plain: true });
+    console.log(post);
+    res.render('postsupdate', { post, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

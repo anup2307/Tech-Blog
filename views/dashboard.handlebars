@@ -1,12 +1,18 @@
-{{#if loggedIn}}
+
 {{#each posts as |post|}}
-{{>card}}
+<div class ="d-flex flex-row justify-content-between mx-auto mt-2 p-3 text-white" style="background-color:rgb(88, 84, 84); border:2px solid rgb(54, 53, 53); width:75%; border-radius:5px" >
+    <div style="font-size:20px">
+        <a href = "/dashboard/{{id}}" class="text-white" style="text-decoration:none;">{{heading}}</a>
+    </div>
+    <div style="font-size:13px">
+        <p>{{createDate}}</p>
+    </div>
+</div>
 {{/each}}
-{{/if}}
 
 
 <div  style="margin-top: 23%; margin-left:50%">
-    <button class="btn btn-primary" type="submit" style="background-color:rgb(88, 84, 84">+ New Post</button>
+    <button class="btn btn-primary" type="submit" style="background-color:rgb(88, 84, 84)">+ New Post</button>
 </div>
 
 <script src="./js/dashboard.js"></script>

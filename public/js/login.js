@@ -1,6 +1,7 @@
 const login = document.querySelector("[type=submit]");
 
 const loginFormHandler = async (event) => {
+  console.log("inside the script");
   event.preventDefault();
 
   const username = document.querySelector("#username").value.trim();
