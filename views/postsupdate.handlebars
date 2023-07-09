@@ -11,9 +11,9 @@
             <label for="description">Content</label>
             <textarea type="text" class="form-control" id="description" rows="3">{{post.description}}</textarea> 
         </div>
-        <button type="submit" class="btn btn-primary" style="background-color:rgb(88, 84, 84);border:2px solid rgb(88, 84, 84)" data-id="{{id}}">Update</button>
-        <button type="submit" class="btn btn-primary" style="background-color:rgb(88, 84, 84);border:2px solid rgb(88, 84, 84)" data-id="{{id}}">Delete</button>
+        <button type="submit" id="update" class="btn btn-primary" style="background-color:rgb(88, 84, 84);border:2px solid rgb(88, 84, 84)" data-id="{{post.id}}">Update</button>
+        <button type="submit" id="delete" class="btn btn-primary" style="background-color:rgb(88, 84, 84);border:2px solid rgb(88, 84, 84)" data-id="{{post.id}}">Delete</button>
     </div>
 </div>
 
-<script src="./js/postsupdatedelete.js"></script>
+<script src="/js/postsupdatedelete.js"></script>

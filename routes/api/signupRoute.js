@@ -22,6 +22,7 @@ router.post('/', async (req, res) => {
   }
 });
 
+//Login route
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await BlogCredentials.findOne({
@@ -60,6 +61,7 @@ router.post('/login', async (req, res) => {
   }
 });
 
+//Logout route
 router.post('/logout', (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {
