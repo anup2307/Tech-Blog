@@ -1,18 +1,22 @@
-
-{{#each posts as |post|}}
-<div class ="d-flex flex-row justify-content-between mx-auto mt-2 p-3 text-white" style="background-color:rgb(88, 84, 84); border:2px solid rgb(54, 53, 53); width:75%; border-radius:5px" >
-    <div style="font-size:20px">
-        <a href = "/dashboard/{{id}}" class="text-white" style="text-decoration:none;">{{heading}}</a>
+<header>
+    {{> header}}
+    <h1>Your Dashboard</h1>
+</header>
+<main>
+    {{#each posts as |post|}}
+    <div class ="d-flex flex-row justify-content-between mx-auto mt-2 p-3 text-white" style="background-color:rgb(88, 84, 84); border:2px solid rgb(54, 53, 53); width:75%; border-radius:5px" >
+        <div style="font-size:20px">
+            <a href = "/dashboard/{{id}}" class="text-white" style="text-decoration:none;">{{heading}}</a>
+        </div>
+        <div style="font-size:13px">
+            <p>{{createDate}}</p>
+        </div>
     </div>
-    <div style="font-size:13px">
-        <p>{{createDate}}</p>
+    {{/each}}
+
+
+    <div  style="margin-top: 23%; margin-left:50%">
+        <button class="btn btn-primary" type="submit" style="background-color:rgb(88, 84, 84)">+ New Post</button>
     </div>
-</div>
-{{/each}}
-
-
-<div  style="margin-top: 23%; margin-left:50%">
-    <button class="btn btn-primary" type="submit" style="background-color:rgb(88, 84, 84)">+ New Post</button>
-</div>
-
+</main>
 <script src="./js/dashboard.js"></script>

@@ -1,11 +1,14 @@
 const router = require('express').Router();
-const { BlogPosts, BlogCredentials } = require('../../models');
+const { BlogPosts, BlogCredentials, BlogComments } = require('../../models');
 
 // Get all posts for homepage
 router.get('/', async (req, res) => {
   try {
-    const blogposts = await BlogPosts.findAll();
+    const blogposts = await BlogPosts.findAll({
+      include: [{ model: BlogCredentials }, { model: BlogComments }],
+    });
     const posts = blogposts.map((postsdata) => postsdata.get({ plain: true }));
+    console.log(posts);
     for (var i = 0; i < posts.length; i++) {
       const username = await BlogCredentials.findOne({
         where: {
@@ -46,15 +49,19 @@ router.get('/signup', (req, res) => {
   }
 });
 
-router.get('/:id', async (req, res) => {
+//get posts by id to update comments
+router.get('/post/:id', async (req, res) => {
   try {
     const postbyid = await BlogPosts.findByPk(req.params.id, {
       include: [{ model: BlogCredentials }],
     });
-
-    const post = postbyid.get({ plain: true });
-    post.createdAt = post.createdAt.toLocaleDateString();
-    res.render('comment', { post, loggedIn: req.session.loggedIn });
+    if (postbyid) {
+      const post = postbyid.get({ plain: true });
+      post.createdAt = post.createdAt.toLocaleDateString();
+      res.render('comment', { post, loggedIn: req.session.loggedIn });
+    } else {
+      res.status(404).end();
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

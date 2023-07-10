@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const { BlogPosts } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // CREATE new Posts
-router.post('/createpost', async (req, res) => {
+router.post('/createpost', withAuth, async (req, res) => {
   try {
     const dbUserData = await BlogPosts.create({
       heading: req.body.heading,
@@ -16,7 +17,8 @@ router.post('/createpost', async (req, res) => {
   }
 });
 
-router.delete('/delete/:id', async (req, res) => {
+//delete existing post
+router.delete('/delete/:id', withAuth, async (req, res) => {
   try {
     console.log(req.params.id, req.session.user_id);
     const data = await BlogPosts.destroy({
@@ -35,7 +37,8 @@ router.delete('/delete/:id', async (req, res) => {
   }
 });
 
-router.put('/update/:id', async (req, res) => {
+//update existing post
+router.put('/update/:id', withAuth, async (req, res) => {
   try {
     const data = await BlogPosts.update(
       {

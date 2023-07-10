@@ -2,6 +2,7 @@ const router = require('express').Router();
 const { BlogPosts } = require('../../models');
 const withAuth = require('../../utils/auth');
 
+//dashboard route to display all the posts after logged in
 router.get('/', withAuth, async (req, res) => {
   try {
     const dbPosts = await BlogPosts.findAll({
@@ -26,6 +27,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
+//new post route
 router.get('/new', withAuth, async (req, res) => {
   try {
     res.render('newpost', { loggedIn: req.session.loggedIn });
@@ -35,6 +37,7 @@ router.get('/new', withAuth, async (req, res) => {
   }
 });
 
+//get 1 post based on the id for updating or deleting
 router.get('/:id', async (req, res) => {
   try {
     const postbyid = await BlogPosts.findByPk(req.params.id);
