@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { BlogCredentials, BlogPosts } = require('../../models');
+const { BlogCredentials, BlogPosts, BlogComments } = require('../../models');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -72,4 +72,22 @@ router.post('/logout', (req, res) => {
   }
 });
 
+
+
+//Add comments route
+router.post('/comments', async (req, res) => {
+  try {
+    console.log(req.body);
+    console.log('inside route');
+    const dbUserData = await BlogComments.create({
+      comment: req.body.comments,
+      user_id: req.session.user_id,
+      post_id: req.body.post_id,
+    });
+    res.status(200).json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 module.exports = router;

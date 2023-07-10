@@ -1,16 +1,16 @@
 {{#each posts as |post|}}
 </br>
 <div class="card ms-5 w-75">
-  <div class="card-header text-white d-flex flex-row justify-content-between" style="background-color:rgb(88, 84, 84)">
+  <div class="card-header text-white d-flex flex-row justify-content-between" style="background-color:rgb(88, 84, 84)" data-id="{{post.id}}">
     <div style="font-size:20px">
-      {{post.heading}}
+     <a href = "/{{post.id}}" class="text-white" style="text-decoration:none;"> {{post.heading}} </a>
     </div>
     <div style="font-size:13px">
       <p>Posted by {{username}} on {{createDate}}</p>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body" data-id="{{post.id}}">
     <p>{{post.description}}</p>
- </div>
+  </div>
 </div>
 {{/each}}

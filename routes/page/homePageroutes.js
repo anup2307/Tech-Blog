@@ -46,4 +46,19 @@ router.get('/signup', (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const postbyid = await BlogPosts.findByPk(req.params.id, {
+      include: [{ model: BlogCredentials }],
+    });
+
+    const post = postbyid.get({ plain: true });
+    post.createdAt = post.createdAt.toLocaleDateString();
+    res.render('comment', { post, loggedIn: req.session.loggedIn });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
 module.exports = router;

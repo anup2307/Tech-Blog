@@ -1,6 +1,3 @@
-const cards = document.getElementsByClassName('card');
-console.log(cards);
-
 const logout = async () => {
   const response = await fetch('/api/users/logout', {
     method: 'POST',
@@ -14,9 +11,4 @@ const logout = async () => {
   }
 };
 
-cards.forEach((item) => {
-  item.addEventListener('click', function (event) {
-    console.log(event);
-  });
-});
 document.querySelector('#logout').addEventListener('click', logout);

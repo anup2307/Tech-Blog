@@ -1,0 +1,20 @@
+<div class="card mx-auto w-50 mt-5" style="border:2px solid rgb(88, 84, 84)">
+    <div class="card-header" style="background-color:rgb(88, 84, 84)">
+        <h3>Add Comments</h3>
+    </div>
+    <div class="card-body px-4 py-3 ">
+        <div class="mb-3">
+            <h5>TITLE: {{post.heading}}</h5>
+            <h5>DESCRIPTION: {{post.description}}</h5>
+            <h5>CreatedBy: {{post.blogcredential.username}}</h5>
+            <h5>CreatedOn: {{post.createdAt}}</h5>
+        </div>
+        <div class="mb-3">
+            <label for="content" class="form-label">Comment</label>
+            <input type="text" class="form-control" id="comment">
+        </div>
+        <button type="submit" id = "submitbtn" class="btn btn-primary" style="background-color:rgb(88, 84, 84)" data-id="{{post.id}}">Submit</button>
+        <button type="submit" id = "closebtn" class="btn btn-primary" style="background-color:rgb(88, 84, 84)">Close</button>
+    </div>
+</div>
+<script src ='/js/updatecomments.js'></script>

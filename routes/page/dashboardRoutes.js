@@ -26,7 +26,7 @@ router.get('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/new', async (req, res) => {
+router.get('/new', withAuth, async (req, res) => {
   try {
     res.render('newpost', { loggedIn: req.session.loggedIn });
   } catch (err) {
