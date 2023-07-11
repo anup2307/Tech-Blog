@@ -4,11 +4,8 @@ const { BlogPosts, BlogCredentials, BlogComments } = require('../../models');
 // Get all posts for homepage
 router.get('/', async (req, res) => {
   try {
-    const blogposts = await BlogPosts.findAll({
-      include: [{ model: BlogCredentials }, { model: BlogComments }],
-    });
+    const blogposts = await BlogPosts.findAll();
     const posts = blogposts.map((postsdata) => postsdata.get({ plain: true }));
-    console.log(posts);
     for (var i = 0; i < posts.length; i++) {
       const username = await BlogCredentials.findOne({
         where: {
